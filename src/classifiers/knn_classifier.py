@@ -18,5 +18,10 @@ class KnnClassifier(ClassifierInterface):
     def predict(self, test_dataset: DatasetInterface) -> List[str]:
         """ para cada amostra no dataset, buscar os k vizinhos mais proximos e 
         retornar a classe mais frequente entre eles """
+        for i in range(train_dataset.size()):
+            lista_treinamento_unitária = self.lista_treinamento[i]
+            lista_treinamento_unitária[0]
+
+
         return []
 
