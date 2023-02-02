@@ -7,4 +7,5 @@ print(ds.get(0))
 
 knn = KnnClassifier()
 knn.train(ImageDataset("data/datasets/img_small/train.txt"))
+knn.predict(ImageDataset("data/datasets/img_small/test.txt"))
 
