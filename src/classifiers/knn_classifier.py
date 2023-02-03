@@ -23,7 +23,9 @@ class KnnClassifier(ClassifierInterface):
         # de forma em que após o predict o programa irá percorrer essa lista e então para as
         # 5 menores distâncias ele irá dizer qual a classe
         for x in range(test_dataset.size()):
-            pass
+            lista_teste_com_vetor_e_classe = []
+            lista_teste_com_vetor_e_classe.append(test_dataset.get(x))
+            lista_vetor_teste = lista_teste_com_vetor_e_classe[0]
             for i in range(self.tamanho_da_lista_treino):
                 lista_treinamento_unitária_vetor_classe = self.lista_treinamento[i]
                 lista_vetor_treino = lista_treinamento_unitária_vetor_classe[0]
@@ -31,8 +33,17 @@ class KnnClassifier(ClassifierInterface):
                 for coordenada in lista_vetor_treino:
                     lista_distancia_classe = []
                     distancia += ((lista_vetor_treino[coordenada] - lista_vetor_teste[coordenada])**2)**0.5
-                    lista_distancia_classe.append(distancia, lista_treinamento_unitária_vetor_classe[1])
-                    lista_para_decisao.append(lista_vetor_classe)
+                    lista_distancia_classe.extend([distancia, lista_treinamento_unitária_vetor_classe[1]])
+                    lista_para_decisao.append(lista_distancia_classe)
 
-        return []
+        for z in range(len(lista_para_decisao)):
+            lista_distancia_classe_analise = lista_para_decisao[z]
+            menor_distancia = lista_distancia_classe_analise[0]
+            if lista_distancia_classe_analise[0] < menor_distancia:
+                menor_distancia = lista_distancia_classe_analise[0]
+                classe_apos_teste = lista_distancia_classe_analise[1]
+            else:
+                pass
+
+        return [classe_apos_teste]
 
