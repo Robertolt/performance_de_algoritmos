@@ -8,9 +8,10 @@ from src.datasets.news_dataset import NewsDataset
 
 knn = KnnClassifier()
 knn.train(ImageDataset("data/datasets/img_small/train.txt"))
-knn.predict(ImageDataset("data/datasets/img_small/test.txt"))
+print(knn.predict(ImageDataset("data/datasets/img_small/test.txt")))
 
 
-#nd = NewsDataset("data/datasets/news-tiny/train.txt")
+
+nd = NewsDataset("data/datasets/news-tiny/train.txt")
 #print(nd.size())
-#print(nd.get(0))
+print(nd.get(0))

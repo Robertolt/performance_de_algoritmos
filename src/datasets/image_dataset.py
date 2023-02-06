@@ -30,5 +30,10 @@ class ImageDataset(DatasetInterface):
         img = cv2.imread(f'{self.path_tratado}{lista_parcial[0]}', 0)
         # ler a i-esima imagem do disco usando a biblioteca cv2 e retornar
         # a imagem e a respectiva classe
-        return img, f"{lista_parcial[1]}"
+        l = []
+        for linha in img:
+            for col in linha:
+                l.append(float(col))
+
+        return l, f"{lista_parcial[1]}"
 

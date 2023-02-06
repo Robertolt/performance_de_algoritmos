@@ -32,27 +32,15 @@ class KnnClassifier(ClassifierInterface):
                 lista_vetor_treino = lista_treinamento_unitária_vetor_classe[0]
                 distancia = 0
                 for numero_de_coordenada in range(len(lista_vetor_treino)):
-                    lista_coordenada_treino = lista_vetor_treino[numero_de_coordenada]
-                    lista_coordenada_teste = lista_vetor_teste[numero_de_coordenada]
-                    coordenada_treino = ((str(lista_coordenada_treino)).strip('[]')).split()
-                    coordenada_teste = ((str(lista_coordenada_teste)).strip('[]')).split()
-                    for numeros in range(len(coordenada_treino)):
-                        lista_distancia_classe = []
-                        coordenada_numerica_treino = int(coordenada_treino[numeros])
-                        coordenada_numerica_teste = int(coordenada_teste[numeros])
-                        distancia += ((coordenada_numerica_treino - coordenada_numerica_teste)**2)**0.5
-                lista_distancia_classe.extend([distancia, lista_treinamento_unitária_vetor_classe[1]])
-                lista_para_decisao.append(lista_distancia_classe)
+                    distancia += (float(lista_vetor_treino[numero_de_coordenada]) -
+                                  float(lista_vetor_teste[numero_de_coordenada])) ** 2
+                distancia = distancia ** 0.5
+                lista_para_decisao.append([distancia, lista_treinamento_unitária_vetor_classe[1]])
+        lista_para_decisao = sorted(lista_para_decisao, key=lambda x: x[0])
 
-        menor_distancia = 10000000000000
-        for z in range(len(lista_para_decisao)):
-            lista_distancia_classe_analise = lista_para_decisao[z]
-            if lista_distancia_classe_analise[0] <= menor_distancia:
-                menor_distancia = lista_distancia_classe_analise[0]
-                classe_apos_teste = lista_distancia_classe_analise[1]
-            else:
-                pass
-
+        classe_apos_teste = []
+        for i in range(5):
+            classe_apos_teste.append(lista_para_decisao[i][1])
 
         return classe_apos_teste
 

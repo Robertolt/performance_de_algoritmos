@@ -27,10 +27,19 @@ class NewsDataset(DatasetInterface):
         # ler a i-esima noticia do disco e retornar o texto como uma string e
         # a classe
         lista_parcial = self.lista_total[idx]
-        news_stringada = ''
+        lista_palavras = []
         with open(self.path_tratado + lista_parcial[0], 'r') as arquivo:
             for line in arquivo:
-                line = str(line)
-                news_stringada += line
+                lista_palavras.append(line.split())
+
+        palavras_a_excluir = ['a', 'e', 'i', 'o', 'u', 'sao', 'diz']
+
+        for lista in lista_palavras:
+            for palavra in lista:
+                if palavra in palavras_a_excluir:
+                    lista_palavras[0].remove(palavra)
+
+        dct_palavras_numeros = {}
+
         return news_stringada, f"{lista_parcial[1]}"
 
