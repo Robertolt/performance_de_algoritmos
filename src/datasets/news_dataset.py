@@ -32,14 +32,17 @@ class NewsDataset(DatasetInterface):
             for line in arquivo:
                 lista_palavras.append(line.split())
 
-        palavras_a_excluir = ['a', 'e', 'i', 'o', 'u', 'sao', 'diz']
+        palavras_a_excluir = ['a', 'e', 'i', 'o', 'u', 'sao', 'diz', 'do', 'as', 'os', 'is', 'es', 'que', 'eles', 'de',
+                              'da', 'eles', 'elas', 'quem', 'com', 'dos', 'seu', 'disse']
+
+        lista_tratada = []
 
         for lista in lista_palavras:
             for palavra in lista:
-                if palavra in palavras_a_excluir:
-                    lista_palavras[0].remove(palavra)
+                if palavra not in palavras_a_excluir:
+                    lista_tratada.append(palavra)
 
         dct_palavras_numeros = {}
 
-        return news_stringada, f"{lista_parcial[1]}"
+        return lista_tratada, f"{lista_parcial[1]}"
 
