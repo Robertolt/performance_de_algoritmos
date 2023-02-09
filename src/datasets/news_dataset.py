@@ -32,8 +32,10 @@ class NewsDataset(DatasetInterface):
             for line in arquivo:
                 lista_palavras.append(line.split())
 
-        palavras_a_excluir = ['a', 'e', 'i', 'o', 'u', 'sao', 'diz', 'do', 'as', 'os', 'is', 'es', 'que', 'eles', 'de',
-                              'da', 'eles', 'elas', 'quem', 'com', 'dos', 'seu', 'disse']
+        palavras_a_excluir = ['a', 'as', 'com', 'como', 'da', 'de', 'disse', 'diz', 'do', 'dos', 'e', 'em',
+                              'elas', 'eles', 'es', 'foi', 'foram', 'i', 'is', 'no', 'na', 'muito', 'o',
+                              'outro', 'outros', 'os', 'para', 'pega','pegou', 'pode',
+                              'quando', 'que', 'quem', 'sao', 'se', 'seu', 'ter', 'u', 'um','uma']
 
         lista_tratada = []
 
