@@ -1,0 +1,3 @@
+dataset: image
+path: data/datasets/img_small
+classifier: knn

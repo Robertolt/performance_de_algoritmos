@@ -13,11 +13,25 @@ class NewsDataset(DatasetInterface):
                 news_n_class = line.split()
                 self.lista_total.append(news_n_class)
 
+
         path = path.split('/')
         path.pop()
         path.append('')
         path = '/'.join(path)
         self.path_tratado = path
+
+        lista_palavras_para_vetorizar = []
+        for idx in range(len(self.lista_total)):
+            with open(self.path_tratado + self.lista_total[idx][0], 'r') as arquivo:
+                for line in arquivo:
+                    lista_auxiliar_vetorizacao = line.split()
+                    for palavras in lista_auxiliar_vetorizacao:
+                        if palavras not in lista_palavras_para_vetorizar:
+                            lista_palavras_para_vetorizar.append(palavras)
+                        else:
+                            pass
+
+
 
     def size(self) -> int:
         # retornar o numero de noticias no dataset (numero de linhas no arquivo)
@@ -32,10 +46,6 @@ class NewsDataset(DatasetInterface):
             for line in arquivo:
                 lista_palavras.append(line.split())
 
-        palavras_a_excluir = ['a', 'as', 'com', 'como', 'da', 'de', 'disse', 'diz', 'do', 'dos', 'e', 'em',
-                              'elas', 'eles', 'es', 'foi', 'foram', 'i', 'is', 'no', 'na', 'muito', 'o',
-                              'outro', 'outros', 'os', 'para', 'pega','pegou', 'pode',
-                              'quando', 'que', 'quem', 'sao', 'se', 'seu', 'ter', 'u', 'um','uma']
 
         lista_tratada = []
 
