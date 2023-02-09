@@ -7,17 +7,23 @@ class NewsDataset(DatasetInterface):
     def __init__(self, path: str) -> None:
         super().__init__(path)
         # ler arquivo contendo os nomes dos arquivos de noticias e as classes
+        path = path.split('/')
+        path.pop()
+        path.append('')
+        path = '/'.join(path)
         self.lista_total = []
-        with open(path, 'r') as arquivo:
+        with open(path + 'test.txt', 'r') as arquivo:
+            for line in arquivo:
+                news_n_class = line.split()
+                self.lista_total.append(news_n_class)
+
+        with open(path + 'train.txt', 'r') as arquivo:
             for line in arquivo:
                 news_n_class = line.split()
                 self.lista_total.append(news_n_class)
 
 
-        path = path.split('/')
-        path.pop()
-        path.append('')
-        path = '/'.join(path)
+
         self.path_tratado = path
 
         lista_palavras_para_vetorizar = []
@@ -31,6 +37,8 @@ class NewsDataset(DatasetInterface):
                         else:
                             pass
 
+        self.lista_posicao_palavras = lista_palavras_para_vetorizar # esse vetor guarda na classe a posicao de todas
+        # as palavras sem repeticao e a comparacao desta lista com o dicionario nos dará o vetor
 
 
     def size(self) -> int:
@@ -45,16 +53,22 @@ class NewsDataset(DatasetInterface):
         with open(self.path_tratado + lista_parcial[0], 'r') as arquivo:
             for line in arquivo:
                 lista_palavras.append(line.split())
+                dicionario = {}
+                for list_palavra in lista_palavras:
+                    for palavras in list_palavra:
+                        if palavras in dicionario:
+                            dicionario[palavras] += 1
+                        else:
+                            dicionario[palavras] = 1
+
+            vetor_noticia = []
+            for palavras in self.lista_posicao_palavras:
+                if palavras in dicionario:
+                    vetor_noticia.append(dicionario[palavras])
+                else:
+                    vetor_noticia.append(0)
 
 
-        lista_tratada = []
 
-        for lista in lista_palavras:
-            for palavra in lista:
-                if palavra not in palavras_a_excluir:
-                    lista_tratada.append(palavra)
-
-        dct_palavras_numeros = {}
-
-        return lista_tratada, f"{lista_parcial[1]}"
+        return vetor_noticia, f"{lista_parcial[1]}"
 
