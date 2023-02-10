@@ -1,4 +1,4 @@
 dataset: image
 path: data/datasets/img_small
-classifier: knn
+classifier: nc
 {'accuracy': 0.8666666666666667}

@@ -5,6 +5,7 @@ from src.experiment import Experiment
 from src.io.args import parse_args
 from src.io.config import load_config
 from src.io.report import write_report
+import time
 
 
 def main():
