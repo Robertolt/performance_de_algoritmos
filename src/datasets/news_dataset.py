@@ -8,21 +8,25 @@ class NewsDataset(DatasetInterface):
         super().__init__(path)
         # ler arquivo contendo os nomes dos arquivos de noticias e as classes
         path = path.split('/')
-        path.pop()
+        self.final_do_path = path.pop()
         path.append('')
         path = '/'.join(path)
         self.lista_total = []
+        self.lista_total1 = []
+        self.lista_total2 = []
+        # é necessário tratar o path antes de adicionar manualmente pois o vetor precisa ter como dimensao
+        # todas as palavras, inclusive as de teste e treino juntas
         with open(path + 'test.txt', 'r') as arquivo:
             for line in arquivo:
                 news_n_class = line.split()
-                self.lista_total.append(news_n_class)
+                self.lista_total1.append(news_n_class) # essa lista apresenta o tamanho do test.txt para a size()
 
         with open(path + 'train.txt', 'r') as arquivo:
             for line in arquivo:
                 news_n_class = line.split()
-                self.lista_total.append(news_n_class)
+                self.lista_total2.append(news_n_class) # essa lista apresenta o tamanho do train.txt para a size()
 
-
+        self.lista_total = self.lista_total2 + self.lista_total1
 
         self.path_tratado = path
 
@@ -43,7 +47,10 @@ class NewsDataset(DatasetInterface):
 
     def size(self) -> int:
         # retornar o numero de noticias no dataset (numero de linhas no arquivo)
-        return len(self.lista_total)
+        if self.final_do_path == 'test.txt':
+            return len(self.lista_total1)
+        else:
+            return len(self.lista_total2)
 
     def get(self, idx: int) -> Tuple[Any, str]:
         # ler a i-esima noticia do disco e retornar o texto como uma string e

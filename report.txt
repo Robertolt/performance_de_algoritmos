@@ -1,3 +1,4 @@
-dataset: news
-path: data/datasets/news-tiny
+dataset: image
+path: data/datasets/img_small
 classifier: knn
+{'accuracy': 0.8666666666666667}

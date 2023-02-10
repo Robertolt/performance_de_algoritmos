@@ -2,7 +2,7 @@ from typing import Dict, List
 from src.classifiers.classifier_interface import ClassifierInterface
 from src.datasets.dataset_interface import DatasetInterface
 from src.datasets.image_dataset import ImageDataset
-
+from collections import Counter
 
 class KnnClassifier(ClassifierInterface):
     def __init__(self) -> None:
@@ -51,9 +51,11 @@ class KnnClassifier(ClassifierInterface):
                 teste.append(classe_ordenada_por_amostra[i][1])
             teste2.append(teste)
 
-        lista_dos_mais_comuns = []
-        # for k in range(len(teste)):
-        #     most_fr
+        lista_frequencia = []
+        for i in range(len(teste2)):
+            occurence_count = Counter(teste2[i])
+            lista_frequencia.append(occurence_count.most_common(1)[0][0])
 
-        return teste2
+
+        return lista_frequencia
 

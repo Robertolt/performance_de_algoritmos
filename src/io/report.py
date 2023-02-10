@@ -17,3 +17,6 @@ def write_report(path: str, config: Dict, metrics_values) -> None:
         opath.pop()
         arquivo.write(f'path: {"/".join(opath)}\n')
         arquivo.write(f'classifier: {config["classifier"]}\n')
+
+
+        arquivo.write(f'{metrics_values}')
